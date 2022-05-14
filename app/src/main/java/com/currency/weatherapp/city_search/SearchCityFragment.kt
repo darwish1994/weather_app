@@ -3,6 +3,7 @@ package com.currency.weatherapp.city_search
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.currency.weatherapp.city_list.CityViewModel
 import com.currency.weatherapp.city_list.list.CityAdapter
@@ -13,6 +14,7 @@ import com.currency.weatherapp.common.network.helper.IViewState
 import com.currency.weatherapp.common.util.DialogUtils
 import com.currency.weatherapp.common.util.OnItemClicked
 import com.currency.weatherapp.common.util.observe
+import com.currency.weatherapp.common.util.onSubmit
 import com.currency.weatherapp.databinding.FragmentSearchCityBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -30,6 +32,11 @@ class SearchCityFragment : BaseBottomSheetFragmentMVVM<FragmentSearchCityBinding
     override fun onCreateInit() {
         binding.citiesRec.adapter = cityAdapter
         cityAdapter.setListener(this)
+        binding.searchEt.onSubmit {
+        //TODO if user story require perform action on submit uncomment  this line and comment [TextWatcher]
+        //getInitViewModel().searchCity(binding.searchEt.text.toString())
+        }
+
         binding.searchEt.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) = Unit
 
@@ -69,7 +76,7 @@ class SearchCityFragment : BaseBottomSheetFragmentMVVM<FragmentSearchCityBinding
                 DialogUtils.showErrorAlert(requireActivity(), {
                     getInitViewModel().searchCity(binding.searchEt.text.toString())
                 }, {
-                   dismiss()
+                    dismiss()
                 }, it.fetchError() ?: 0)
             }
 

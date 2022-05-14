@@ -23,6 +23,8 @@
         </activity>
         <activity
             android:name=".MainActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:configChanges="keyboard|orientation"
             android:exported="false">
 
         </activity>

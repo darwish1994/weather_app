@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:fitsSystemWindows="true"
     tools:context=".city_search.SearchCityFragment">
 
     <EditText
@@ -16,6 +17,9 @@
         android:elevation="3dp"
         android:hint="@string/hint_search"
         android:padding="16dp"
+        android:singleLine="true"
+        android:inputType="text"
+        android:imeOptions="actionSearch"
         android:textColorHint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
