@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/cityListFragment">
+
+    <fragment
+        android:id="@+id/cityListFragment"
+        android:name="com.currency.weatherapp.city_list.CityListFragment"
+        android:label="fragment_city_list"
+        tools:layout="@layout/fragment_city_list" >
+        <action
+            android:id="@+id/action_cityListFragment_to_searchCityFragment"
+            app:destination="@id/searchCityFragment" />
+        <action
+            android:id="@+id/action_cityListFragment_to_weatherHistoricalFragment"
+            app:destination="@id/weatherHistoricalFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/searchCityFragment"
+        android:name="com.currency.weatherapp.city_search.SearchCityFragment"
+        android:label="fragment_search_city"
+        tools:layout="@layout/fragment_search_city" />
+    <fragment
+        android:id="@+id/weatherHistoricalFragment"
+        android:name="com.currency.weatherapp.weather_history.WeatherHistoricalFragment"
+        android:label="fragment_weather_historical"
+        tools:layout="@layout/fragment_weather_historical" >
+        <action
+            android:id="@+id/action_weatherHistoricalFragment_to_weatherDetailsFragment"
+            app:destination="@id/weatherDetailsFragment" />
+        <argument
+            android:name="city"
+            app:argType="string" />
+        <argument
+            android:name="location"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/weatherDetailsFragment"
+        android:name="com.currency.weatherapp.weather_details.WeatherDetailsFragment"
+        android:label="fragment_weather_details"
+        tools:layout="@layout/fragment_weather_details" >
+        <argument
+            android:name="weather"
+            app:argType="com.currency.weatherapp.common.model.WeatherHour" />
+        <argument
+            android:name="location"
+            app:argType="string" />
+    </fragment>
+</navigation>
