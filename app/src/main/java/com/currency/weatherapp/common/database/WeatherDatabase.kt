@@ -2,7 +2,7 @@ package com.currency.weatherapp.common.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.currency.weatherapp.common.model.City
+import com.currency.weatherapp.domain.model.City
 
 @Database(
     entities = [City::class],

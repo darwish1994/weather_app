@@ -1,7 +1,7 @@
 package com.currency.weatherapp.common.util
 
 import androidx.recyclerview.widget.DiffUtil
-import com.currency.weatherapp.common.model.WeatherHour
+import com.currency.weatherapp.domain.model.WeatherHour
 
 class WeatherDiffUtil(private val oldList: List<WeatherHour>, private val newList: List<WeatherHour>) :
     DiffUtil.Callback() {

@@ -3,7 +3,7 @@ package com.currency.weatherapp.common.network.helper
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.currency.weatherapp.common.network.interceptor.ResponseInterceptor
-import com.currency.weatherapp.common.network.response.ResponseWrapper
+import com.currency.weatherapp.data.remote.response.ResponseWrapper
 import com.currency.weatherapp.common.util.NetworkCode
 import com.currency.weatherapp.common.util.NetworkCode.CONVERSION_SERVER_ERROR
 import com.currency.weatherapp.common.util.NetworkCode.HTTP_TIME_OUT_CODE
@@ -36,7 +36,8 @@ interface NetworkRemoteServiceCall {
                 val response = apiCall.invoke()
                 Log.v("SearchCityFragment", "code : $response.")
                 // get response code from http
-                val httpCode = (response as? HttpException)?.response()?.code() ?: SUCCESS_SERVER_CODE
+                val httpCode =
+                    (response as? HttpException)?.response()?.code() ?: SUCCESS_SERVER_CODE
                 Log.v("SearchCityFragment", "code : $httpCode")
                 if (httpCode == SUCCESS_SERVER_CODE) {
                     state.postValue(NetworkResponse.success(response))
@@ -179,4 +180,30 @@ interface NetworkRemoteServiceCall {
         }
     }
 
+    /**
+     * safeApiCall
+     * @param apiCall as suspend fn to call api
+     * pass suspend api fn as parameter to safeApiCall fn
+     * invoke Api at IO thread and handle logic
+     * @return NetworkResponse<BaseResponse<T>>  hase success state data and failure state data
+     */
+    suspend fun <T> safeApiCallWithoutBaseResponse2(apiCall: suspend () -> T): NetworkResponse<T> =
+        try {
+            // invoke suspend service method
+            val response = apiCall.invoke()
+
+            NetworkResponse.success(response)
+        } catch (throwable: Exception) {
+
+
+            if (throwable is ResponseInterceptor.NoInternetConnection || throwable is IOException)
+                NetworkResponse.error(NetworkCode.NO_INTERNET_CODE)
+            else if (throwable is HttpException && throwable.code() == HTTP_TIME_OUT_CODE) {
+                NetworkResponse.error(HTTP_TIME_OUT_CODE)
+            } else {
+                NetworkResponse.error(CONVERSION_SERVER_ERROR)
+            }
+        }
+
 }
+

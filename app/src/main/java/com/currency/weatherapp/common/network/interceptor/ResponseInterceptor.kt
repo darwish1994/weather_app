@@ -3,7 +3,7 @@ package com.currency.weatherapp.common.network.interceptor
 
 
 import com.currency.weatherapp.BuildConfig
-import com.currency.weatherapp.common.di.NetworkHelper
+import com.currency.weatherapp.data.di.NetworkHelper
 import okhttp3.Interceptor
 import okhttp3.Response
 import java.io.IOException

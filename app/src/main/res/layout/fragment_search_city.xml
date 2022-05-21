@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:fitsSystemWindows="true"
-    tools:context=".city_search.SearchCityFragment">
+    tools:context=".presenter.city_search.SearchCityFragment">
 
     <EditText
         android:id="@+id/search_et"

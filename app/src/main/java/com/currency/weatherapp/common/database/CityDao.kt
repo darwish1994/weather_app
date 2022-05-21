@@ -5,7 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.currency.weatherapp.common.model.City
+import com.currency.weatherapp.domain.model.City
 
 @Dao
 interface CityDao {

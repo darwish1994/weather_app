@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WeatherApp">
         <activity
-            android:name=".splash.SplashActivity"
+            android:name="com.currency.weatherapp.presenter.splash.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".presenter.MainActivity"
             android:windowSoftInputMode="adjustResize"
             android:configChanges="keyboard|orientation"
             android:exported="false">
